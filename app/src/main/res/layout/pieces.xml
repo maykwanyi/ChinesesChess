@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<piece xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_rook_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="rook"
+        android:src="@drawable/rook_black" />
+
+    <ImageView
+        android:id="@+id/image_rook_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="rook"
+        android:src="@drawable/rook_red" />
+
+    <ImageView
+        android:id="@+id/image_horse_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="horse"
+        android:src="@drawable/horse_red" />
+
+    <ImageView
+        android:id="@+id/image_horse_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="horse"
+        android:src="@drawable/horse_black" />
+
+    <ImageView
+        android:id="@+id/image_cannon_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="horse"
+        android:src="@drawable/cannon_red" />
+
+    <ImageView
+        android:id="@+id/image_cannon_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="horse"
+        android:src="@drawable/cannon_black" />
+
+    <ImageView
+        android:id="@+id/image_solider_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="solider"
+        android:src="@drawable/solider_black" />
+
+    <ImageView
+        android:id="@+id/image_solider_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="solider"
+        android:src="@drawable/solider_red" />
+
+    <ImageView
+        android:id="@+id/image_elephant_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="elephant"
+        android:src="@drawable/elephant_black" />
+
+    <ImageView
+        android:id="@+id/image_elephant_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="elephant"
+        android:src="@drawable/elephant_red" />
+
+    <ImageView
+        android:id="@+id/image_general_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="general"
+        android:src="@drawable/general_black" />
+
+    <ImageView
+        android:id="@+id/image_general_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="general"
+        android:src="@drawable/general_red" />
+
+    <ImageView
+        android:id="@+id/image_advisor_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="advisor"
+        android:src="@drawable/advisor_black" />
+
+    <ImageView
+        android:id="@+id/image_advisor_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:onClick="advisor"
+        android:src="@drawable/advisor_red" />
+</piece>
