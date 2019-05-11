@@ -10,8 +10,8 @@ public class Board
     public Point2D RGP;
     public Point2D BGP;
 
-    public int RIVER_BLACK_SIDE = 6;
-    public int RIVER_RED_SIDE = 5;
+    public int RIVER_BLACK_SIDE = 5;
+    public int RIVER_RED_SIDE = 4;
 
     public Board()
     {
@@ -26,13 +26,13 @@ public class Board
 
     public boolean isIn (int X, int Y)
     {
-        return X < board.length && Y < board[0].length;
+        return (X < board.length && Y < board[0].length) && (X >= 0 && Y >= 0);
     }
 
     public void updatePos(Piece new_p, int old_X, int old_Y)
     {
         board[new_p.X][new_p.Y] = new_p;
-        board[old_Y][old_Y].isEmpty = true;
+        board[old_X][old_Y] = new Piece(old_X, old_Y);
     }
     public boolean isInRedPalace (int X, int Y)
     {

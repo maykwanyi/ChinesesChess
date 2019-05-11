@@ -32,11 +32,11 @@ public class Solider extends Piece
     {
         if (isRed && Y > board.RIVER_RED_SIDE)
             return true;
-        else if (isRed && Y < board.RIVER_BLACK_SIDE)
+        else if (!isRed && Y < board.RIVER_BLACK_SIDE)
             return true;
         return false;
     }
-
+    @Override
     public boolean move(int X, int Y, Board board)
     {
         LinkedList<Point2D> movelist = getMoveList(board);
@@ -50,29 +50,22 @@ public class Solider extends Piece
         }else
             return false;
     }
-    public LinkedList<Point2D> getMoveList(Board board)
-    {
+    public LinkedList<Point2D> getMoveList(Board board) {
         LinkedList<Point2D> list = new LinkedList<Point2D>();
-        if (!checkCrossed(board))
-        {
+        if (!checkCrossed(board)) {
             if (isRed)
                 list.add(new Point2D(X, Y + 1));
             else
-                list.add(new Point2D(X, Y + 1));
-        }
-        else
-        {
-            if (isRed)
-            {
+                list.add(new Point2D(X, Y - 1));
+        } else {
+            if (isRed) {
                 if (board.isIn(X + 1, Y))
                     list.add(new Point2D(X + 1, Y));
                 if (board.isIn(X - 1, Y))
                     list.add(new Point2D(X - 1, Y));
                 if (board.isIn(X, Y + 1))
-                    list.add(new Point2D(X + 1, Y));
-            }
-            else
-            {
+                    list.add(new Point2D(X , Y + 1));
+            } else {
                 if (board.isIn(X + 1, Y))
                     list.add(new Point2D(X + 1, Y));
                 if (board.isIn(X - 1, Y))
@@ -82,5 +75,12 @@ public class Solider extends Piece
             }
         }
         return list;
+    }
+    @Override
+    public String toString(){
+        if(isRed)
+            return "RS";
+        else
+            return "BS";
     }
 }

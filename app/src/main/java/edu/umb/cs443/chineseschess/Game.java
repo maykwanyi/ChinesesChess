@@ -45,7 +45,7 @@ public class Game {
         generatePiece(board, false, 3, 7, 7);
 
         //initial pos of soliders(兵)
-        for (int i = 0, X = 0 ,Y = 3; i < 10; i++, X += 2 ) {
+        for (int i = 0, X = 0 ,Y = 3; i < 10 && X < 9; i++, X += 2 ) {
             generatePiece(board, true, 6, X, Y);
             generatePiece(board, false, 6, X, Y + 3);
         }
@@ -55,6 +55,10 @@ public class Game {
         switch (type){
             case 0: //帅
                 board.board[X][Y] = new General(isRed, X, Y, type);
+                if(isRed)
+                    board.RGP = new Point2D(X, Y);
+                else
+                    board.BGP = new Point2D(X, Y);
                 break;
             case 1: //車
                 board.board[X][Y] = new Rook(isRed, X, Y, type);

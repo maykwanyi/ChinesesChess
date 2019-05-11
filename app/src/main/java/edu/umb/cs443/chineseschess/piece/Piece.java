@@ -26,7 +26,7 @@ public class Piece
         this.X = X;
         this.Y = Y;
         isEmpty = true;
-    }
+    }/*
     public void eat (Board board)
     {
         if (!board.board[X][Y].isEmpty && board.board[X][Y].isRed != isRed)
@@ -37,6 +37,13 @@ public class Piece
             else if (new Point2D(X, Y).equals(board.BGP))
                 Game.checkmate("BLACK");
         }
+    } */
+    public String toString(){
+        return " ";
+    }
+
+    public boolean move(int X, int Y, Board board){
+        return false;
     }
 }
 

@@ -10,9 +10,14 @@ public class Point2D
         this.X = X;
         this.Y = Y;
     }
-    public boolean equals(Point2D that)
+    @Override
+    public boolean equals( Object that)
     {
-        return this.X == that.X && this.Y == that.Y;
+        if (that instanceof Point2D) {
+            Point2D other = (Point2D) that;
+            return this.X == other.X && this.Y == other.Y;
+        }
+        return false;
     }
 
     public int GetHashCode()

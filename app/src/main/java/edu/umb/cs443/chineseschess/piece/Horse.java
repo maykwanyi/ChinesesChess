@@ -10,7 +10,7 @@ public class Horse extends Piece {
     {
         super(isRed, X, Y, id);
     }
-
+    @Override
     public boolean move(int X, int Y, Board board)
     {
         LinkedList<Point2D> movelist = getMoveList(board);
@@ -38,25 +38,32 @@ public class Horse extends Piece {
         }
         if (board.isIn(X - 1, Y)){
             if (board.board[X - 1][Y].isEmpty && board.isIn(X - 2, Y + 1))
-            { list.add(new Point2D(X + 2, Y + 1)); }
+            { list.add(new Point2D(X - 2, Y + 1)); }
             if (board.board[X - 1][Y].isEmpty && board.isIn(X - 2, Y - 1))
-                list.add(new Point2D(X + 2, Y - 1));
+                list.add(new Point2D(X - 2, Y - 1));
         }
         if (board.isIn(X, Y + 1))
         {
             if (board.board[X][Y + 1].isEmpty && board.isIn(X + 1, Y + 2))
-            { list.add(new Point2D(X + 2, Y + 1)); }
+            { list.add(new Point2D(X + 1, Y + 2)); }
             if (board.board[X - 1][Y].isEmpty && board.isIn(X - 1, Y + 2))
-                list.add(new Point2D(X + 2, Y - 1));
+                list.add(new Point2D(X - 1, Y + 2));
         }
         if (board.isIn(X, Y - 1))
         {
             if (board.board[X][Y - 1].isEmpty && board.isIn(X + 1, Y - 2))
-            { list.add(new Point2D(X + 2, Y + 1)); }
+            { list.add(new Point2D(X + 1, Y - 2)); }
             if (board.board[X][Y - 1].isEmpty && board.isIn(X - 1, Y - 2))
-                list.add(new Point2D(X + 2, Y - 1));
+                list.add(new Point2D(X - 1, Y - 2));
         }
         return list;
+    }
+    @Override
+    public String toString(){
+        if(isRed)
+            return "RH";
+        else
+            return "BH";
     }
 }
 

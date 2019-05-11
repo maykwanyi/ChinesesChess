@@ -9,6 +9,7 @@ public class Rook extends Piece {
         super(isRed, X, Y, id);
     }
 
+    @Override
     public boolean move (int X, int Y,Board board)
     {
         LinkedList<Point2D> movelist = getMoveList(board);
@@ -27,46 +28,61 @@ public class Rook extends Piece {
     {
         boolean isEnd = false;
         LinkedList<Point2D> list = new LinkedList<Point2D>();
+        int targetX,targetY;
+        if(board.isIn(X + 1, Y)) {
+            targetX = X + 1;
+            targetY = Y;
 
-        int targetX = X + 1;
-        int targetY = Y;
-
-        while (!isEnd && board.isIn(targetX,targetY))
-        {
-            isEnd = board.board[targetX][targetY].isEmpty;
-            list.add(new Point2D(targetX, targetY));
-            targetX++;
+            while (!isEnd && board.isIn(targetX, targetY)) {
+                isEnd = !board.board[targetX][targetY].isEmpty;
+                list.add(new Point2D(targetX, targetY));
+                targetX++;
+            }
+            isEnd = false;
         }
 
-        targetX = X - 1;
-        targetY = Y;
+        if(board.isIn(X - 1, Y)) {
+            targetX = X - 1;
+            targetY = Y;
 
-        while (!isEnd && board.isIn(targetX, targetY))
-        {
-            isEnd = board.board[targetX][targetY].isEmpty;
-            list.add(new Point2D(targetX, targetY));
-            targetX--;
+            while (!isEnd && board.isIn(targetX, targetY)) {
+                isEnd = !board.board[targetX][targetY].isEmpty;
+                list.add(new Point2D(targetX, targetY));
+                targetX--;
+            }
+            isEnd = false;
         }
 
-        targetX = X;
-        targetY = Y + 1;
+        if(board.isIn(X, Y+1)) {
+            targetX = X;
+            targetY = Y + 1;
 
-        while (!isEnd && board.isIn(targetX, targetY))
-        {
-            isEnd = board.board[targetX][targetY].isEmpty;
-            list.add(new Point2D(targetX, targetY));
-            targetY++;
+            while (!isEnd && board.isIn(targetX, targetY)) {
+                isEnd = !board.board[targetX][targetY].isEmpty;
+                list.add(new Point2D(targetX, targetY));
+                targetY++;
+            }
+            isEnd = false;
         }
 
-        targetX = X;
-        targetY = Y - 1;
-        while (!isEnd && board.isIn(targetX, targetY))
-        {
-            isEnd = board.board[targetX][targetY].isEmpty;
-            list.add(new Point2D(targetX, targetY));
-            targetY--;
+        if(board.isIn(X, Y - 1)) {
+            targetX = X;
+            targetY = Y - 1;
+            while (!isEnd && board.isIn(targetX, targetY)) {
+                isEnd = !board.board[targetX][targetY].isEmpty;
+                list.add(new Point2D(targetX, targetY));
+                targetY--;
+            }
+            isEnd = false;
         }
         return list;
+    }
+    @Override
+    public String toString(){
+        if(isRed)
+            return "RR";
+        else
+            return "BR";
     }
 }
 

@@ -1,6 +1,5 @@
 package edu.umb.cs443.chineseschess.piece;
 
-import java.awt.List;
 import java.util.LinkedList;
 
 import edu.umb.cs443.chineseschess.Board;
@@ -10,7 +9,7 @@ public class Advisor extends Piece {
     public Advisor(boolean isRed, int X, int Y, int id){
         super(isRed, X, Y, id);
     }
-
+    @Override
     public boolean move(int X, int Y, Board board){
         LinkedList<Point2D> movelist = getMoveList(board);
         if(movelist.contains(new Point2D(X,Y))){
@@ -53,6 +52,13 @@ public class Advisor extends Piece {
         else if (!isRed && (X == 4 && Y == 9) || (X == 5 && Y == 8) || (X == 6 && Y == 9) || (X == 4 && Y == 7) || (X == 6 && Y == 7))
             return true;
         return false;
+    }
+    @Override
+    public String toString(){
+        if(isRed)
+            return "RA";
+        else
+            return "BA";
     }
 }
 

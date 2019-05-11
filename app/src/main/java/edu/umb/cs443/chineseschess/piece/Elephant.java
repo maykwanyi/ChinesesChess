@@ -1,7 +1,6 @@
 package edu.umb.cs443.chineseschess.piece;
 
 
-import java.awt.List;
 import java.util.LinkedList;
 
 import edu.umb.cs443.chineseschess.Board;
@@ -19,7 +18,7 @@ public class Elephant extends Piece
         else
             return (X == 0 && Y == 2) || (X == 2 && Y == 9) || (X == 5 && Y == 9) || (X == 5 && Y == 7) || (X == 8 && Y == 7) || (X == 2 || Y == 6) || (X == 5 || Y == 6);
     }
-
+    @Override
     public boolean move(int X, int Y, Board board){
         LinkedList<Point2D> movelist = getMoveList(board);
         if(movelist.contains(new Point2D(X,Y))){
@@ -36,28 +35,42 @@ public class Elephant extends Piece
     public LinkedList<Point2D> getMoveList(Board board){
         LinkedList<Point2D> list = new LinkedList<Point2D>();
         if (isRed){
-            if (board.isIn(super.X + 2, super.Y + 2) && board.board[X + 1][Y + 1].isEmpty && Y + 2 < board.RIVER_RED_SIDE)
-                list.add(new Point2D(super.X + 2, super.Y + 2));
-            if (board.isIn(super.X - 2, super.Y + 2) && board.board[X - 1][Y + 1].isEmpty && Y + 2 < board.RIVER_RED_SIDE)
-                list.add(new Point2D(super.X - 2, super.Y + 2));
-            if (board.isIn(super.X - 2, super.Y - 2) && board.board[X - 1][Y - 1].isEmpty && Y - 2 < board.RIVER_RED_SIDE)
-                list.add(new Point2D(X - 2, Y - 2));
-            if (board.isIn(super.X + 2, Y - 2) && board.board[X - 1][Y - 1].isEmpty && Y - 2 < board.RIVER_RED_SIDE)
-                list.add(new Point2D(X + 2, Y - 2));
+            if (board.isIn(super.X + 2, super.Y + 2) && Y + 2 <= board.RIVER_RED_SIDE)
+                if(board.board[X + 1][Y + 1].isEmpty)
+                    list.add(new Point2D(super.X + 2, super.Y + 2));
+            if (board.isIn(super.X - 2, super.Y + 2) && Y + 2 <= board.RIVER_RED_SIDE)
+                if (board.board[X - 1][Y + 1].isEmpty)
+                    list.add(new Point2D(super.X - 2, super.Y + 2));
+            if (board.isIn(super.X - 2, super.Y - 2) && Y - 2 <= board.RIVER_RED_SIDE)
+                if(board.board[X - 1][Y - 1].isEmpty)
+                    list.add(new Point2D(X - 2, Y - 2));
+            if (board.isIn(super.X + 2, Y - 2) && Y - 2 <= board.RIVER_RED_SIDE)
+                if(board.board[X + 1][Y - 1].isEmpty)
+                    list.add(new Point2D(X + 2, Y - 2));
         }
         else{
-            if (board.isIn(super.X + 2, Y + 2) && board.board[X + 1][Y + 1].isEmpty && Y + 2 < board.RIVER_BLACK_SIDE)
-                list.add(new Point2D(X + 2, Y + 2));
-            if (board.isIn(super.X - 2, Y + 2) && board.board[X - 1][Y + 1].isEmpty && Y + 2 < board.RIVER_BLACK_SIDE)
-                list.add(new Point2D(X - 2, Y + 2));
-            if (board.isIn(super.X - 2, Y - 2) && board.board[X - 1][Y - 1].isEmpty && Y - 2 < board.RIVER_BLACK_SIDE)
-                list.add(new Point2D(X - 2, Y - 2));
-            if (board.isIn(super.X + 2, Y - 2) && board.board[X - 1][Y - 1].isEmpty && Y - 2 < board.RIVER_BLACK_SIDE)
-                list.add(new Point2D(X + 2, Y - 2));
+            if (board.isIn(super.X + 2, Y + 2) && Y + 2 >= board.RIVER_BLACK_SIDE)
+                if(board.board[X + 1][Y + 1].isEmpty)
+                    list.add(new Point2D(X + 2, Y + 2));
+            if (board.isIn(super.X - 2, Y + 2)  && Y + 2 >= board.RIVER_BLACK_SIDE)
+                if (board.board[X - 1][Y + 1].isEmpty)
+                    list.add(new Point2D(X - 2, Y + 2));
+            if (board.isIn(super.X - 2, Y - 2) &&  Y - 2 >= board.RIVER_BLACK_SIDE)
+                if(board.board[X - 1][Y - 1].isEmpty)
+                    list.add(new Point2D(X - 2, Y - 2));
+            if (board.isIn(super.X + 2, Y - 2) && Y - 2 >= board.RIVER_BLACK_SIDE)
+                if(board.board[X + 1][Y - 1].isEmpty)
+                    list.add(new Point2D(X + 2, Y - 2));
         }
         return list;
     }
-
+    @Override
+    public String toString(){
+        if(isRed)
+            return "RE";
+        else
+            return "BE";
+    }
 
 }
 

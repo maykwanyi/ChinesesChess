@@ -13,7 +13,7 @@ public class General extends Piece
     {
         super(isRed, X, Y, id);
     }
-
+    @Override
     public boolean move (int X, int Y, Board board)
     {
         if (checkMove(X, Y,board) && isRed)
@@ -24,7 +24,7 @@ public class General extends Piece
             this.Y = Y;
             board.RGP.X = X;
             board.RGP.Y = Y;
-            eat(board);
+            //eat(board);
             board.updatePos(this,oldX,oldY);
             return true;
         }
@@ -37,7 +37,7 @@ public class General extends Piece
             this.Y = Y;
             board.BGP.X = X;
             board.BGP.Y = Y;
-            eat(board);
+            //eat(board);
             board.updatePos(this, oldX, oldY);
             return true;
         }/*
@@ -74,17 +74,17 @@ public class General extends Piece
     {
         LinkedList <Point2D> list= new LinkedList<Point2D>();
 
-        if (checkMove(X++, Y, board))
-            list.add(new Point2D(X, Y));
-        if (checkMove(X--, Y, board))
-            list.add(new Point2D(X, Y));
-        if (checkMove(X, Y++, board))
-            list.add(new Point2D(X, Y));
-        if (checkMove(X, Y--, board))
-            list.add(new Point2D(X, Y));
-        if (checkMove(board.RGP.X, board.RGP.Y,board))
+        if (checkMove(X + 1, Y, board))
+            list.add(new Point2D(X + 1, Y));
+        if (checkMove(X - 1, Y, board))
+            list.add(new Point2D(X - 1, Y));
+        if (checkMove(X, Y + 1, board))
+            list.add(new Point2D(X, Y + 1));
+        if (checkMove(X, Y - 1, board))
+            list.add(new Point2D(X, Y - 1));
+        if (checkMove(board.RGP.X, board.RGP.Y,board) && !isRed)
             list.add(new Point2D(board.RGP.X, board.RGP.Y));
-        if (checkMove(board.BGP.X, board.BGP.Y, board))
+        if (checkMove(board.BGP.X, board.BGP.Y, board) && isRed)
             list.add(new Point2D(board.BGP.X, board.BGP.Y));
 
         return list;
@@ -92,22 +92,24 @@ public class General extends Piece
 
     private boolean checkMove(int X, int Y,Board board)
     {
-        if (isRed && X >= 3 && X <= 5 && Y <= 2 && Y >= 0 && (Math.abs(X - this.X) == 1 ^ Math.abs(Y - this.Y) == 1) && (board.board[X][Y].isEmpty) && X != this.X && Y != this.Y)
+        if(isRed && board.isInRedPalace(X , Y))
             return true;
-        else if (!isRed && X >= 3 && X <= 5 && Y >= 7 && Y <= 9 && (Math.abs(X - this.X) == 1 ^ Math.abs(Y - this.Y) == 1) && (board.board[X][Y].isEmpty) && X != this.X && Y != this.Y)
+        else if (!isRed && board.isInBlackPalace(X, Y))
             return true;
-        else if (board.RGP.Y == board.BGP.Y)
-        {
-            boolean hasCovers = false;
-            for (int i = board.RGP.X; i < board.BGP.X; i++)
-                if (board.board[board.RGP.X][i].isEmpty)
-                {
-                    hasCovers = true;
-                    break;
-                }
-            if (!hasCovers)
-                return true;
+        else if (board.BGP.X == board.RGP.X){
+            for (int i = board.RGP.Y + 1; i < board.board[0].length - 1; i++){
+                if (!board.board[board.RGP.X][i].isEmpty)
+                    return false;
+            }
+            return true;
         }
         return false;
+    }
+    @Override
+    public String toString(){
+        if(isRed)
+            return "RG";
+        else
+            return "BG";
     }
 }
