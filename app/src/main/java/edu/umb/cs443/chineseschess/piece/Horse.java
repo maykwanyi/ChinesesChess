@@ -61,9 +61,9 @@ public class Horse extends Piece {
     @Override
     public String toString(){
         if(isRed)
-            return "RH";
+            return "马";
         else
-            return "BH";
+            return "馬";
     }
 }
 

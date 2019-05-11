@@ -56,9 +56,9 @@ public class Advisor extends Piece {
     @Override
     public String toString(){
         if(isRed)
-            return "RA";
+            return "仕";
         else
-            return "BA";
+            return "士";
     }
 }
 

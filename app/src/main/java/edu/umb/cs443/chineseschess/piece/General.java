@@ -108,8 +108,8 @@ public class General extends Piece
     @Override
     public String toString(){
         if(isRed)
-            return "RG";
+            return "帥";
         else
-            return "BG";
+            return "將";
     }
 }

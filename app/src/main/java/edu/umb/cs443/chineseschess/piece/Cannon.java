@@ -120,9 +120,9 @@ public class Cannon extends Piece {
     @Override
     public String toString(){
         if(isRed)
-            return "RC";
+            return "炮";
         else
-            return "BC";
+            return "砲";
     }
 }
 

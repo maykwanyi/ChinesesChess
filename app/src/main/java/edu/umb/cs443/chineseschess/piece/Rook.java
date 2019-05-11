@@ -80,9 +80,9 @@ public class Rook extends Piece {
     @Override
     public String toString(){
         if(isRed)
-            return "RR";
+            return "车";
         else
-            return "BR";
+            return "車";
     }
 }
 

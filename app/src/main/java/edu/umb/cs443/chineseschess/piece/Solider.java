@@ -79,8 +79,8 @@ public class Solider extends Piece
     @Override
     public String toString(){
         if(isRed)
-            return "RS";
+            return "兵";
         else
-            return "BS";
+            return "卒";
     }
 }

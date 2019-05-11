@@ -67,9 +67,9 @@ public class Elephant extends Piece
     @Override
     public String toString(){
         if(isRed)
-            return "RE";
+            return "相";
         else
-            return "BE";
+            return "象";
     }
 
 }
