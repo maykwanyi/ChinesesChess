@@ -3,16 +3,17 @@ package edu.umb.cs443.chineseschess;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.ImageViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     GridView gridView;
     boolean selected = false;
     int selectedIndex = -1;
@@ -20,8 +21,38 @@ public class MainActivity extends Activity {
     boolean twoPlayers = true;
     boolean redTrun;
 
-//    private String[] numbers = new String[9*10];
-    private ImageView[] numbers = new ImageView[9*10];
+    //    private String[] numbers = new String[9*10];
+    //private ImageView[] numbers = new ImageView[9*10];
+    public Integer[] numbers = {
+            R.drawable.rook_red, R.drawable.horse_red,
+            R.drawable.elephant_red, R.drawable.advisor_red,
+            R.drawable.general_red,
+            R.drawable.advisor_red, R.drawable.elephant_red,
+            R.drawable.horse_red, R.drawable.rook_red,
+
+            null, null, null, null, null, null, null, null, null,
+
+            null, R.drawable.cannon_red, null, null, null, null, null, R.drawable.cannon_red, null,
+
+            R.drawable.solider_red, null, R.drawable.solider_red, null, R.drawable.solider_red, null,
+            R.drawable.solider_red, null, R.drawable.solider_red,
+
+            null, null, null, null, null, null, null, null, null,
+
+            null, null, null, null, null, null, null, null, null,
+
+            R.drawable.solider_black, null, R.drawable.solider_black, null, R.drawable.solider_black, null,
+            R.drawable.solider_black, null, R.drawable.solider_black,
+
+            null, R.drawable.cannon_black, null, null, null, null, null, R.drawable.cannon_black, null,
+
+            null, null, null, null, null, null, null, null, null,
+
+            R.drawable.rook_black, R.drawable.horse_black,
+            R.drawable.elephant_black, R.drawable.advisor_black, R.drawable.general_black,
+            R.drawable.advisor_black, R.drawable.elephant_black,
+            R.drawable.horse_black, R.drawable.rook_black,
+    };
 
     Board board;
 
@@ -42,16 +73,21 @@ public class MainActivity extends Activity {
         debugger = (TextView) findViewById(R.id.debugger);
 
         gridView = (GridView) findViewById(R.id.gridView);
-        updateBoard();
-        redTrun = true;
 
- //       ArrayAdapter<String> adapterS = new ArrayAdapter<String>(this,
- //               R.layout.selected_piece, numbers);
-
-        ArrayAdapter<ImageView> adapter = new ArrayAdapter<ImageView>(this,
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,
                 R.layout.selected_piece, numbers);
 
         gridView.setAdapter(adapter);
+        updateBoard();
+        redTrun = true;
+
+        //       ArrayAdapter<String> adapterS = new ArrayAdapter<String>(this,
+        //               R.layout.selected_piece, numbers);
+
+        //ArrayAdapter<ImageView> adapter = new ArrayAdapter<ImageView>(this,
+        //        R.layout.selected_piece, numbers);
+
+
 //        gridView.setAdapter(adapterS);
 //        gridView.setAdapter(new ImageAdapter(this));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -84,7 +120,7 @@ public class MainActivity extends Activity {
         }
 
         );
-     //   t1.start();
+        //   t1.start();
     }
 
     private void selectPiece(int pos){
@@ -150,64 +186,65 @@ public class MainActivity extends Activity {
     private void updateBoard(){
         ImageView copy;
         String copy2;
+        ImageView[] number = new ImageView[numbers.length];
         for (int i = 0; i < numbers.length; i++){
             Point2D indexs = get2dIndex(i);
             copy2 = board.board[indexs.X][indexs.Y].toString();
             switch(copy2){
                 case "仕":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_advisor_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_advisor_red);
                     copy.setImageResource(R.drawable.advisor_red);
                     break;
                 case "士":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_advisor_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_advisor_black);
                     copy.setImageResource(R.drawable.advisor_black);
                     break;
                 case "炮":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_cannon_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_cannon_red);
                     copy.setImageResource(R.drawable.cannon_red);
                     break;
                 case "砲":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_cannon_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_cannon_black);
                     copy.setImageResource(R.drawable.cannon_black);
                     break;
                 case "相":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_elephant_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_elephant_red);
                     copy.setImageResource(R.drawable.elephant_red);
                     break;
                 case "象":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_elephant_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_elephant_black);
                     copy.setImageResource(R.drawable.elephant_black);
                     break;
                 case "帥":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_general_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_general_red);
                     copy.setImageResource(R.drawable.general_red);
                     break;
                 case "將":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_general_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_general_black);
                     copy.setImageResource(R.drawable.general_black);
                     break;
                 case "马":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_horse_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_horse_red);
                     copy.setImageResource(R.drawable.horse_red);
                     break;
                 case "馬":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_horse_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_horse_black);
                     copy.setImageResource(R.drawable.horse_black);
                     break;
                 case "车":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_rook_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_rook_red);
                     copy.setImageResource(R.drawable.rook_red);
                     break;
                 case "車":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_rook_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_rook_black);
                     copy.setImageResource(R.drawable.rook_black);
                     break;
                 case "兵":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_solider_red);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_solider_red);
                     copy.setImageResource(R.drawable.solider_red);
                     break;
                 case "卒":
-                    numbers[i] = copy = (ImageView) findViewById(R.id.image_solider_black);
+                    number[i] = copy = (ImageView) findViewById(R.id.image_solider_black);
                     copy.setImageResource(R.drawable.solider_black);
                     break;
                 default:
