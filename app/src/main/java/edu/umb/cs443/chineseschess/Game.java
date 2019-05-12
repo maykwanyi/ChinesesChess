@@ -77,7 +77,43 @@ public class Game {
                 break;
             case 6: //兵
                 board.board[X][Y] = new Solider(isRed,X,Y,type);
+                break;
+            case -1:
+                board.board[X][Y] = new Piece(X,Y);
         }
 
+    }
+
+    public static void unDo(Board board){
+        unDoOneTime(board);
+        unDoOneTime(board);
+    }
+
+    private static void unDoOneTime(Board board){
+        int pointer = board.logPointer;
+        if(pointer < 1)
+            return;
+
+        int last_X = board.log[pointer][4];
+        int last_Y = board.log[pointer][5];
+        int current_X = board.log[pointer][2];
+        int current_Y = board.log[pointer][3];
+        int typeId = board.log[pointer][1];
+        int eatenId = board.log[pointer][6];
+        boolean isRed = (1 == board.log[pointer][0]) ? true: false;
+
+        generatePiece(board, isRed, typeId, last_X,last_Y);
+        generatePiece(board,!isRed,eatenId,current_X,current_Y);
+        board.logPointer--;
+    }
+
+    public static void jumpBackTo (Board board, int turn){
+        if (turn > board.logPointer)
+            return;
+        else{
+            for (int i = 0;i < (board.logPointer - turn); i++ )
+                unDo(board);
+            board.logPointer = turn;
+        }
     }
 }

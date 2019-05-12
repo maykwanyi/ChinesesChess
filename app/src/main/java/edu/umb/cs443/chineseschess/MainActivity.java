@@ -26,12 +26,16 @@ public class MainActivity extends Activity {
 
     private static int target;
 
+    TextView debugger;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         board = new Board();
         Game.standardInit(board);
+
+        debugger = (TextView) findViewById(R.id.debugger);
 
         gridView = (GridView) findViewById(R.id.gridView);
         updateBoard();
@@ -46,6 +50,12 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id){
 
+
+                debugger.setText(board.log[board.logPointer][0] +", "+
+                        board.log[board.logPointer][1] +", "+
+                        board.log[board.logPointer][2] +", "+
+                        board.log[board.logPointer][3] +", "+
+                        board.log[board.logPointer][4] +", ");
                 t2=new MoveTask();
                 t2.execute(new Integer(position));
 
@@ -117,7 +127,6 @@ public class MainActivity extends Activity {
         protected void onProgressUpdate(Void... values) {
             ((ArrayAdapter)gridView.getAdapter()).notifyDataSetChanged();
         }
-
     }
 
     private int get1dIndex(int x, int y){
@@ -130,9 +139,28 @@ public class MainActivity extends Activity {
     }
 
     private void updateBoard(){
-        for (int i = 0; i < numbers.length; i++){
+        for (int i = 0; i < numbers.length; i++) {
             Point2D indexs = get2dIndex(i);
             numbers[i] = board.board[indexs.X][indexs.Y].toString();
         }
+    }
+
+    public void unDo (View view) {
+        Game.unDo(board);
+        updateAndNotify();
+
+    }
+
+    private void updateAndNotify(){
+        updateBoard();
+        ((ArrayAdapter)gridView.getAdapter()).notifyDataSetChanged();
+
+    }
+
+    public void init(View view){
+        this.board = new Board();
+        Game.standardInit(board);
+        redTrun = true;
+        updateAndNotify();
     }
 }
