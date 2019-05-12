@@ -13,12 +13,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/debugger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
 
-        <TextView
-            android:id="@+id/debugger"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:columnWidth="5dp"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:numColumns="9"></GridView>
 
         <Button
             android:id="@+id/button"
@@ -32,24 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="init"
-            android:text="New" />
-
-
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:background="@android:color/holo_blue_light"
-            android:columnWidth="5dp"
-            android:gravity="center"
-            android:horizontalSpacing="5dp"
-            android:numColumns="9"
-            android:padding="5dp"
-            android:verticalSpacing="20dp" />
-    </LinearLayout>
-
+            android:text="Play Again!" />
+    </LinearLayout>>
 </RelativeLayout>
