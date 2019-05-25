@@ -1,19 +1,25 @@
 package edu.umb.cs443.chineseschess;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ImageView;
 
-
 public class MainActivity extends Activity {
-    GridView gridView;
+    ImageView gridView;
     boolean selected = false;
     int selectedIndex = -1;
 
@@ -22,8 +28,8 @@ public class MainActivity extends Activity {
 
     ImageAdapter adapter;
 
-    private String[]numbers;
-//    private ImageView[] numbers = new ImageView[9*10];
+    private String[]number;
+    //private ImageView[] numbers = new ImageView[9*10];
 
     Board board;
 
@@ -34,6 +40,41 @@ public class MainActivity extends Activity {
 
     TextView debugger;
 
+    public Integer[] numbers = {
+            R.drawable.rook_red, R.drawable.horse_red,
+            R.drawable.elephant_red, R.drawable.advisor_red,
+            R.drawable.general_red,
+            R.drawable.advisor_red, R.drawable.elephant_red,
+            R.drawable.horse_red, R.drawable.rook_red,
+
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+            0, R.drawable.cannon_red, 0, 0, 0, 0, 0, R.drawable.cannon_red, 0,
+
+            R.drawable.solider_red, 0, R.drawable.solider_red, 0, R.drawable.solider_red, 0,
+            R.drawable.solider_red, 0, R.drawable.solider_red,
+
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+            R.drawable.solider_black, 0, R.drawable.solider_black, 0, R.drawable.solider_black, 0,
+            R.drawable.solider_black, 0, R.drawable.solider_black,
+
+            0, R.drawable.cannon_black, 0, 0, 0, 0, 0, R.drawable.cannon_black, null,
+
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+            R.drawable.rook_black, R.drawable.horse_black,
+            R.drawable.elephant_black, R.drawable.advisor_black, R.drawable.general_black,
+            R.drawable.advisor_black, R.drawable.elephant_black,
+            R.drawable.horse_black, R.drawable.rook_black,
+    };
+
+    String[] nameArray = {};
+    //LinearLayout listView;
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,27 +82,33 @@ public class MainActivity extends Activity {
         board = new Board();
         Game.standardInit(board);
 
-        numbers = new String [9 * 10];
+        number = new String [9 * 10];
 
         debugger = (TextView) findViewById(R.id.debugger);
 
-        gridView = (GridView) findViewById(R.id.gridView);
+        //listAdapter setup = new listAdapter(this, nameArray, numbers);
+        //listView = (LinearLayout) findViewById(R.id.listviewID);
+        listView = (ListView) findViewById(R.id.listviewID);
+
+        //gridView = (ListView) findViewById(R.id.listview);
 
         redTrun = true;
 
         updateBoard();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        //ArrayAdapter<ListView> adapter = new ArrayAdapter<ListView>(this,
+        //        R.layout.selected_piece, numbers);
+
+        //       ArrayAdapter<ImageView> adapter = new ArrayAdapter<ImageView>(this,
+        //               R.layout.selected_piece, numbers);
+
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,
                 R.layout.selected_piece, numbers);
 
- //       ArrayAdapter<ImageView> adapter = new ArrayAdapter<ImageView>(this,
- //               R.layout.selected_piece, numbers);
+        listView.setAdapter(new ArrayAdapter<Integer>(this, R.layout.selected_piece, numbers));
+        //setup.setAdapter(adapter);
 
-        gridView.setAdapter(adapter);
-//        gridView.setAdapter(adapterS);
-
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id){
 
@@ -74,7 +121,7 @@ public class MainActivity extends Activity {
                 }
                 else
                     movePiece(position);
-                ((ArrayAdapter) gridView.getAdapter()).notifyDataSetChanged();
+                ((ArrayAdapter) listView.getAdapter()).notifyDataSetChanged();
             }
         });
 
@@ -83,7 +130,7 @@ public class MainActivity extends Activity {
                 while(true) {
                     gridView.post(new Runnable() {
                         public void run() {
-                            ((ArrayAdapter) gridView.getAdapter()).notifyDataSetChanged();
+                            ((ArrayAdapter) listView.getAdapter()).notifyDataSetChanged();
                         }
                     });
                 }
@@ -91,12 +138,17 @@ public class MainActivity extends Activity {
         }
 
         );
-     //   t1.start();
+        //   t1.start();
     }
 
     private void selectPiece(int pos){
         int X = get2dIndex(pos).X;
         int Y = get2dIndex(pos).Y;
+        //Paint paint = new Paint();
+        //int color = ContextCompat.getColor(Content, R.color.red);
+        //paint.setColor(res.getColor(R.color.red));
+        //paint.setColor(Color.RED);
+
         if(board.board[X][Y].isEmpty || board.board[X][Y].isRed != redTrun)
             return;
         else{
@@ -134,7 +186,7 @@ public class MainActivity extends Activity {
         }
 
         protected void onProgressUpdate(Void... values) {
-            ((ArrayAdapter)gridView.getAdapter()).notifyDataSetChanged();
+            ((ArrayAdapter)listView.getAdapter()).notifyDataSetChanged();
         }
     }
 
@@ -150,7 +202,7 @@ public class MainActivity extends Activity {
     private void updateBoard(){
         for (int i = 0; i < numbers.length; i++) {
             Point2D indexs = get2dIndex(i);
-            numbers[i] = board.board[indexs.X][indexs.Y].toString();
+            number[i] = board.board[indexs.X][indexs.Y].toString();
         }
     }
 
@@ -233,7 +285,7 @@ public class MainActivity extends Activity {
 
     private void updateAndNotify(){
         updateBoard();
-        ((ArrayAdapter)gridView.getAdapter()).notifyDataSetChanged();
+        ((ArrayAdapter)listView.getAdapter()).notifyDataSetChanged();
 
     }
 
@@ -243,4 +295,15 @@ public class MainActivity extends Activity {
         redTrun = true;
         updateAndNotify();
     }
+/*
+    public void selectedGrid(Canvas canvas){
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(-500010);
+        //int color = ContextCompat.getColor(context, R.color.red);
+        //paint.setColor(res.getColor(R.color.red));
+        canvas.drawPaint(paint);
+        //paint.setColor(Color.RED);
+    }
+*/
 }
