@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,48 +7,58 @@
     android:contentDescription="@string/app_name"
     tools:context="edu.umb.cs443.chineseschess.MainActivity">
 
-    <LinearLayout
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:id="@+id/base"
+        android:orientation="vertical"/>
 
         <TextView
             android:id="@+id/debugger"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:background="@color/black"
+            android:text=" Chinese Chess"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-
-        <GridView
-            android:id="@+id/gridView"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
+            android:layout_height="650dp"
             android:background="@drawable/board"
-            android:columnWidth="5dp"
-            android:gravity="center"
-            android:horizontalSpacing="5dp"
-            android:numColumns="9"
-            android:padding="5dp"
-            android:verticalSpacing="20dp" />
+            android:id="@+id/listviewID"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="unDo"
-            android:text="Undo" />
+            android:layout_marginBottom="1dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/New"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="init"
-            android:text="New" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@android:color/darker_gray"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:onClick="unDo"
+                android:text="Undo"
+                android:textStyle="bold" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/New"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@color/red"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:onClick="init"
+                android:text="Play Again" />
+        </LinearLayout>
+
+    </ListView>
+</ConstraintLayout>
